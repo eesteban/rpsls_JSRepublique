@@ -206,9 +206,7 @@ Meteor.methods({
 function calculateResult (game, player1Id, player2Id){
     let player1Choice = game[player1Id];
     let player2Choice = game[player2Id];
-
-    console.log('Player 1('+player1Id+'): '+player1Choice+ ' VS Player2('+player2Id+'): '+ player2Choice);
-
+    
     let result = '';
     if(player1Choice===player2Choice){
         result = 'draw';

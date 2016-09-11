@@ -1,10 +1,5 @@
 Template.gameInfo.helpers({
-    online: function () {
-        let match = Matches.findOne(Session.get('selectedMatch'));
-        if(match){
-            return match.type == 'online';
-        }
-    },
+
     playerOption: function () {
         var game = Template.instance().data;
         return game[Meteor.userId()];

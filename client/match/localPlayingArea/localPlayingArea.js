@@ -1,7 +1,4 @@
 Template.localPlayingArea.helpers({
-    options : function() {
-        return ['rock', 'paper', 'scissor', 'lizard', 'spock'];
-    },
     currentPlayer: function(){
         let matchId = Session.get('selectedMatch');
         let match = Matches.findOne(matchId, {games: 1});
@@ -27,13 +24,5 @@ Template.localPlayingArea.helpers({
                 }
             }
         }
-    }
-});
-
-Template.localPlayingArea.events({
-    'click .option': function(event){
-        let option = $(event.target).closest('.option').attr('id');
-        let matchId = Session.get('selectedMatch');
-        Meteor.call('setOption', matchId, option);
     }
 });

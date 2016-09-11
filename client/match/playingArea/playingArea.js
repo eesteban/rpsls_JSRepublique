@@ -1,9 +1,6 @@
 Template.playingArea.helpers({
-    options : function() {
-        return ['rock', 'paper', 'scissor', 'lizard', 'spock'];
-    },
     choiceMade: function () {
-        let match = Matches.findOne(Template.instance().data, {games: 1});
+        let match = Matches.findOne(Session.get('selectedMatch'), {games: 1});
         if(match){
             let games = match.games;
             let gamesLength = games.length;
@@ -20,14 +17,5 @@ Template.playingArea.helpers({
                 return choiceMade;
             }
         }
-    }
-});
-
-Template.playingArea.events({
-    'click .option': function(event){
-        let option = $(event.target).closest('.option').attr('id');
-        let matchId = Template.instance().data;
-        Session.set('option', option);
-        Meteor.call('setOption', matchId, option);
     }
 });

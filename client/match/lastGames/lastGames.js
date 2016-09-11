@@ -1,6 +1,6 @@
 Template.lastGames.helpers({
     lastGames: function () {
-        var match = Matches.findOne(Template.instance().data);
+        var match = Matches.findOne(Session.get('selectedMatch'));
 
         if(match){
             let games = match.games;

@@ -10,16 +10,15 @@
                 {{#if matchExists}}
                     <div class="col-md-4 result-area">
                         <div class="row">
-                            {{> matchStats matchId}}
+                            {{> matchStats }}
                         </div>
                         <div class="row hidden-sm hidden-xs">
-                            {{> lastGames matchId}}
+                            {{> lastGames }}
                         </div>
                     </div>
                     <div class="col-md-8 playing-area">
-
                         {{#if online}}
-                            {{> playingArea matchId}}
+                            {{> playingArea}}
                         {{else}}
                             {{> localPlayingArea}}
                         {{/if}}

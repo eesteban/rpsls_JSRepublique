@@ -1,23 +1,20 @@
 <template name="gameInfo">
-    <div class="media">
-        <div class="col-xs-5">
-            {{#if online}}
-                {{#with playerOption}}
-                    <img src="/img/{{this}}.svg" alt="{{this}}" class="media-object img-fluid" style="width: 35px; height:auto;">
-                {{/with}}
-            {{else}}
-                {{#with player1Option}}
-                    <img src="/img/{{this}}.svg" alt="{{this}}" class="media-object img-fluid" style="width: 35px; height:auto;">
-                {{/with}}
-                VS
-                {{#with player2Option}}
-                    <img src="/img/{{this}}.svg" alt="{{this}}" class="media-object img-fluid" style="width: 35px; height:auto;">
-                {{/with}}
-            {{/if}}
-
-        </div>
-        <div class="col-xs-7">
-            <h4 class="media-heading">{{adaptedResult}}</h4>
-        </div>
+    <div class="center">
+        {{adaptedResult}}
+    </div>
+    <div class="center">
+        {{#if online}}
+            {{#with playerOption}}
+                <img src="/img/{{this}}.svg" alt="{{this}}" class="img-fluid" style="width: 35px; height:auto;">
+            {{/with}}
+        {{else}}
+            {{#with player1Option}}
+                <img src="/img/{{this}}.svg" alt="{{this}}" class="mg-fluid" style="width: 35px; height:auto;">
+            {{/with}}
+            VS
+            {{#with player2Option}}
+                <img src="/img/{{this}}.svg" alt="{{this}}" class="img-fluid" style="width: 35px; height:auto;">
+            {{/with}}
+        {{/if}}
     </div>
 </template>

@@ -1,18 +1,20 @@
 <template name="matchStats">
-    {{#with results}}
-        <div class="row">
-            <p>Games: {{totalGames}}</p>
-        </div>
-        <div class="row">
-            <div class="col-xs-4">
-                <span class="glyphicon glyphicon-thumbs-up" ></span> {{wins}}
+    <div class="match-stats center">
+        {{#with results}}
+            <div class="row">
+                <p>Games: {{totalGames}}</p>
             </div>
-            <div class="col-xs-4">
-                <span class="glyphicon glyphicon-record" ></span> {{draws}}
+            <div class="row">
+                <div class="col-xs-4">
+                    <span class="glyphicon glyphicon-thumbs-up" ></span> {{wins}}
+                </div>
+                <div class="col-xs-4">
+                    <span class="glyphicon glyphicon-record" ></span> {{draws}}
+                </div>
+                <div class="col-xs-4">
+                    <span class="glyphicon glyphicon-thumbs-down" ></span> {{loses}}
+                </div>
             </div>
-            <div class="col-xs-4">
-                <span class="glyphicon glyphicon-thumbs-down" ></span> {{loses}}
-            </div>
-        </div>
-    {{/with}}
+        {{/with}}
+    </div>
 </template>

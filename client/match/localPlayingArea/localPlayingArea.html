@@ -3,10 +3,6 @@
         {{currentPlayer}}
     </p>
     <div class="row">
-        {{#each options}}
-            <div class="option col-sm-2 col-xs-4" id="{{this}}">
-                {{> option this}}
-            </div>
-        {{/each}}
+        {{> allOptions}}
     </div>
 </template>
