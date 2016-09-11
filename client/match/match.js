@@ -3,7 +3,6 @@ Template.match.helpers({
         return Session.get('selectedMatch');
     },
     matchExists: function(){
-        let matchExists = !!Matches.findOne(Session.get('selectedMatch'));
-        return matchExists;
+        return !!Matches.findOne(Session.get('selectedMatch'));
     }
 });

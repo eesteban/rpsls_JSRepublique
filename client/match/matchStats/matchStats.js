@@ -12,16 +12,32 @@ Template.matchStats.helpers({
             let games = match.games;
             results.totalGames=games.length;
 
-            for(let i=0, l=games.length; i<l; i++){
-                var game = games[i];
-                var result = game.result;
-                if(result){
-                    if(result == 'draw'){
-                        results.draws++;
-                    }else if(result == Meteor.userId()){
-                        results.wins++;
-                    }else{
-                        results.loses++;
+            if(match.type=='online'){
+                for(let i=0, l=games.length; i<l; i++){
+                    let game = games[i];
+                    let result = game.result;
+                    if(result){
+                        if(result == 'draw'){
+                            results.draws++;
+                        }else if(result == Meteor.userId()){
+                            results.wins++;
+                        }else{
+                            results.loses++;
+                        }
+                    }
+                }
+            }else{
+                for(let i=0, l=games.length; i<l; i++){
+                    let game = games[i];
+                    let result = game.result;
+                    if(result){
+                        if(result == 'draw'){
+                            results.draws++;
+                        }else if(result == 'Player 1'){
+                            results.wins++;
+                        }else{
+                            results.loses++;
+                        }
                     }
                 }
             }

@@ -1,0 +1,20 @@
+<template name="newMatch">
+    <form id="newMatchForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
+        </div>
+        <div class="form-group">
+            <label for="type">Type</label>
+            <div class="input-group">
+                <label class="radio-inline">
+                    <input type="radio" name="match_type" value="online"> Online
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="match_type" value="local" checked> Local
+                </label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create new match</button>
+    </form>
+</template>

@@ -1,7 +1,9 @@
-Meteor.publish('myMatches', function(){
+Meteor.publish('myMatchesOnline', function(){
     let userId = this.userId;
     if(userId){
         var filter = {
+            name:1,
+            type:1,
             players:1,
             status:1
         };
@@ -10,7 +12,37 @@ Meteor.publish('myMatches', function(){
 
         var matches = Matches.find(
             {
-                players: userId
+                players: userId,
+                type: 'online'
+            },
+            {
+                fields: filter
+            }
+        );
+
+        if(matches){
+            return matches;
+        }
+    }
+
+    return this.ready();
+});
+
+Meteor.publish('myMatchesLocal', function(){
+    let userId = this.userId;
+    if(userId){
+        var filter = {
+            name:1,
+            type:1,
+            players:1,
+            status:1,
+            games:1
+        };
+
+        var matches = Matches.find(
+            {
+                players: userId,
+                type: 'local'
             },
             {
                 fields: filter
@@ -31,10 +63,13 @@ Meteor.publish('availableMatches', function(){
         var matches = Matches.find(
             {
                 players: {$ne: userId},
+                type: 'online',
                 status: 'available'
             },
             {
                 fields: {
+                    name:1,
+                    type:1,
                     players: 1,
                     status: 1
                 }
@@ -50,13 +85,23 @@ Meteor.publish('availableMatches', function(){
 });
 
 Meteor.methods({
-    createMatch: function () {
+    createMatch: function (name, type) {
+        check(name, String);
+        check(type, Match.OneOf('online', 'local'));
         let userId = Meteor.userId();
 
         var match ={
-            players: [userId],
-            status: 'available'
+            name: name,
+            type: type,
+            players: [userId]
         };
+
+        if(type=='online'){
+            match.status = 'available';
+        }else{
+            match.status = 'open';
+            match.games = [];
+        }
 
         var matchId = Matches.insert(match);
         if (!matchId) throw new Meteor.Error('create-match', 'Match not created');
@@ -81,6 +126,9 @@ Meteor.methods({
     setOption: function(matchId, option){
         check(matchId, String);
         check(option, Match.OneOf('rock', 'paper', 'scissor', 'lizard', 'spock'));
+        const player1 = 'Player 1';
+        const player2 = 'Player 2';
+
 
         let userId = Meteor.userId();
 
@@ -97,13 +145,44 @@ Meteor.methods({
 
             let update={};
 
+            if(match.type=='local'){
+                let games = match.games;
+                let gamesLength = games.length;
+
+                if(gamesLength==0){
+                    userId = player1;
+                }else{
+                    let lastGame = games[gamesLength-1];
+                    if(lastGame.result){
+                        userId = player1;
+                    }else{
+                        let optionPlayer1Set = typeof lastGame[player1] != 'undefined';
+                        if(optionPlayer1Set){
+                            userId = player2;
+                        }else{
+                            userId = player1;
+                        }
+                    }
+                }
+            }
+
             if(lastGame && !lastGame.result){
                 //If there IS an open game: update the game
                 lastGame[userId]= option;
 
                 //If both players have specified their option
                 if(Object.keys(lastGame).length==2){
-                    lastGame.result = calculateResult(lastGame, match.players[0], match.players[1]);
+                    let player1Id;
+                    let player2Id;
+
+                    if(match.type=='online'){
+                        player1Id = match.players[0];
+                        player2Id = match.players[1];
+                    }else{
+                        player1Id = player1;
+                        player2Id = player2;
+                    }
+                    lastGame.result = calculateResult(lastGame, player1Id, player2Id);
                 }
 
                 let key = 'games.'+lastGameIndex;
@@ -129,8 +208,6 @@ function calculateResult (game, player1Id, player2Id){
     let player2Choice = game[player2Id];
 
     console.log('Player 1('+player1Id+'): '+player1Choice+ ' VS Player2('+player2Id+'): '+ player2Choice);
-
-
 
     let result = '';
     if(player1Choice===player2Choice){
@@ -174,7 +251,5 @@ function calculateResult (game, player1Id, player2Id){
             }
         }
     }
-
-    console.log('Result'+ result);
     return result;
 }

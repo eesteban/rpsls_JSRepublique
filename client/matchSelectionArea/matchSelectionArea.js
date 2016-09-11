@@ -1,5 +1,6 @@
 Template.matchSelectionArea.onCreated(function () {
-    Meteor.subscribe('myMatches');
+    Meteor.subscribe('myMatchesOnline');
+    Meteor.subscribe('myMatchesLocal');
     Meteor.subscribe('availableMatches');
 });
 
@@ -13,6 +14,8 @@ Template.matchSelectionArea.helpers({
             },
             {
                 fields: {
+                    name:1,
+                    type:1,
                     players: 1,
                     games: 1,
                     status: 1
@@ -34,6 +37,8 @@ Template.matchSelectionArea.helpers({
             },
             {
                 fields: {
+                    name:1,
+                    type:1,
                     players: 1,
                     status: 1
                 }
@@ -43,30 +48,10 @@ Template.matchSelectionArea.helpers({
         if(matches){
             return matches;
         }
-    },
-    notMatchCreated: function() {
-        let userId = Meteor.userId();
-
-        let matches = Matches.find(
-            {
-                players: userId,
-                status: 'available'
-            },
-            {
-                fields: {
-                    games: 1
-                }
-            }
-        );
-
-        return matches.count()<1;
     }
 });
 
 Template.matchSelectionArea.events({
-    'click #createMatch': function(){
-        Meteor.call('createMatch');
-    },
     'click .available-match': function(event){
         let matchId = $(event.target).closest('li').attr('id');
         Meteor.call('acceptMatch', matchId, function(error){
@@ -77,9 +62,7 @@ Template.matchSelectionArea.events({
     },
 
     'click .my-match': function(event){
-        console.log('myMatch');
         let matchId = $(event.target).closest('li').attr('id');
-        console.log(matchId);
         let match = Matches.findOne(matchId, {status:1});
         if(match.status === 'open'){
             Session.set('selectedMatch', matchId);
