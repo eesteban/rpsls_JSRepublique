@@ -1,0 +1,16 @@
+<template name="playingArea">
+    <p>
+        {{#unless choiceMade}}
+            Make your choice!
+        {{else}}
+            Wait for your opponent! (Or change your choice ;))
+        {{/unless}}
+    </p>
+    <div class="row">
+        {{#each options}}
+            <div class="option col-sm-2 col-xs-4" id="{{this}}">
+                {{> option this}}
+            </div>
+        {{/each}}
+    </div>
+</template>

@@ -1,0 +1,12 @@
+<template name="gameInfo">
+    <div class="media">
+        <div class="media-left media-middle">
+            {{#with playerOption}}
+                <img src="/img/{{this}}.svg" alt="{{this}}" class="media-object img-fluid" style="width: 35px; height:auto;">
+            {{/with}}
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">{{adaptedResult}}</h4>
+        </div>
+    </div>
+</template>

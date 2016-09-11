@@ -1,0 +1,7 @@
+<template name="lastGames">
+    <ul class="list-group last-games">
+        {{#each lastGames}}
+            <li class="list-group-item last-game"> {{> gameInfo this}} </li>
+        {{/each}}
+    </ul>
+</template>

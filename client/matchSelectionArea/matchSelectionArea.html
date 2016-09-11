@@ -1,0 +1,40 @@
+<template name="matchSelectionArea">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a data-toggle="collapse" href="#matchSelectionPanelBody">Matches</a>
+            </h3>
+        </div>
+        <div id="matchSelectionPanelBody" class="panel-collapse">
+            <div class="panel-body">
+                <h4>Your matches:</h4>
+                <ul class="list-group">
+                    {{#each myMatches}}
+                        <li class="list-group-item match-item my-match" id="{{this._id}}">
+                            {{> myMatch this}}
+                        </li>
+                    {{else}}
+                        You don't have any match, create one or challenge another player!
+                    {{/each}}
+                </ul>
+
+                <h4>Available matches:</h4>
+                <ul class="list-group">
+                    {{#each availableMatches}}
+                        <li class="list-group-item match-item available-match" id="{{this._id}}">
+                            {{> availableMatch this}}
+                        </li>
+                    {{else}}
+                        There isn't any match, create one!
+                    {{/each}}
+                </ul>
+
+                {{#if notMatchCreated}}
+                    <button class="btn btn-primary btn-block" id="createMatch">
+                        Create match!
+                    </button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

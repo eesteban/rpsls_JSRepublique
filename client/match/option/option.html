@@ -1,0 +1,7 @@
+<template name="option">
+    {{#if equals this chosenOption}}
+        <img src="/img/{{this}}.svg" alt="{{this}}" class="img-fluid optionImg" style="opacity: 1;">
+    {{else}}
+        <img src="/img/{{this}}.svg" alt="{{this}}" class="img-fluid optionImg" >
+    {{/if}}
+</template>

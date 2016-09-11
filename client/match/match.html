@@ -1,0 +1,28 @@
+<template name="match">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <a data-toggle="collapse" href="#matchPanelBody">Current match</a>
+            </h3>
+        </div>
+        <div id="matchPanelBody" class="panel-collapse">
+            <div class="panel-body match-area">
+                {{#if matchExists}}
+                    <div class="col-md-4 result-area">
+                        <div class="row">
+                            {{> matchStats matchId}}
+                        </div>
+                        <div class="row hidden-sm hidden-xs">
+                            {{> lastGames matchId}}
+                        </div>
+                    </div>
+                    <div class="col-md-8 playing-area">
+                        {{> playingArea matchId}}
+                    </div>
+                {{else}}
+                    <p>Select a match and join the game!</p>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,64 @@
+body {
+    background: #dbdbdb !important;
+}
+
+.row {
+    margin: 0;
+}
+
+.match-status{
+    font-size: 80%;
+}
+
+.col-* {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.match-area{
+    padding: 0;
+}
+
+.playing-area{
+    border: 1px #ddd;
+}
+
+.result-area{
+    background: #f5f5f5;
+    border-right: 2px #ddd;
+}
+
+.last-games{
+    margin: 0;
+}
+
+.last-game{
+    padding: 5px 7px;
+    border: none;
+}
+
+.match-item{
+    padding: 10px 5px;
+}
+
+.page-header{
+    background: #3779ae;
+    font-size: 70%;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.footer {
+    background: #3779ae;
+    text-align: center;
+    color: #ffffff;
+    font-style: italic;
+}
+
+.optionImg{
+    max-width:85%;
+    height:auto;
+    opacity: 0.5;
+}

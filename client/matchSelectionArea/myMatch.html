@@ -1,0 +1,21 @@
+<template name="myMatch">
+    <div class="row">
+        <div class="col-xs-10">
+            {{#unless equals status 'available'}}
+                {{> matchStats _id}}
+            {{else}}
+                <p>Waiting for opponent</p>
+            {{/unless}}
+        </div>
+        <div class="col-xs-2">
+            {{#if equals status 'open'}}
+                <span class="label label-success match-status">Open</span>
+            {{else}}{{#if equals status 'closed'}}
+                <span class="label label-danger">Closed</span>
+            {{else}}
+                <span class="label label-info">Available</span>
+            {{/if}}
+            {{/if}}
+        </div>
+    </div>
+</template>
